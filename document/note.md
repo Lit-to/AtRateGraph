@@ -12,7 +12,7 @@
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   }
   ```
-  a
+  
   ``eslint.config.js``
   ```js
   import stylistic from "@stylistic/eslint-plugin";
