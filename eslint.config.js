@@ -32,7 +32,7 @@ export default [
       '@stylistic/brace-style': ['error', 'allman'],
       '@stylistic/quotes': ['error', 'single'] 
     }
-  },  // Markdown
+  },
   {
     files: ['**/*.md'],
     plugins: {
@@ -40,8 +40,6 @@ export default [
     },
     processor: 'markdown/markdown'
   },
-
-  // Markdown内のコードブロック
   {
     files: ['**/*.md/*.js'],
     plugins: {
@@ -51,5 +49,4 @@ export default [
       '@stylistic/indent': ['error', 2]
     }
   }
-
 ];
