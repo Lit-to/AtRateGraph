@@ -1,4 +1,8 @@
 function Top() {
-  return <div>Top</div>;
+  return (
+    <body>
+      <h1>AAAAAAA</h1>
+    </body>
+  );
 }
 export { Top };

@@ -4,7 +4,7 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import "./root.css";
 import { Top } from "./top/main.tsx";
 
-document.title = "Tlitter";
+document.title = "AtRateGraph";
 
 function Root() {
   return (
