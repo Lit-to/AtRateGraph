@@ -1,20 +1,34 @@
-import { useRef, type JSX } from "react";
+import { useRef, type JSX, useEffect, useState } from "react";
 import "./jsonDisplay.css";
-// import {  } from "./page/top/main.tsx";
 
-class displayClass {
-  async onPushedDisplayButton(event: React.MouseEvent<HTMLButtonElement>) {}
-  public searchBox(): JSX.Element {
-    return (
-      <div className="container">
-        <div className="searchRow">
-          <textarea className="searchResult"></textarea>
-          <button className="displayButton" onClick={async (event) => await this.onPushedDisplayButton(event)}>
-            表示
-          </button>
-        </div>
-      </div>
-    );
+function Graph({ contestJsonInfo }: { contestJsonInfo: string }) {
+  function onPushedDisplayButton(
+    event: React.MouseEvent<HTMLButtonElement>,
+    jsonInputRef: React.RefObject<HTMLTextAreaElement | null>
+  ) {
+    if (jsonInputRef.current === null) {
+      return;
+    }
+    setItems([jsonInputRef.current.value]);
+    return;
   }
+  const jsonInputRef = useRef<HTMLTextAreaElement>(null);
+  const [items, setItems] = useState<string[]>([]);
+  useEffect(() => {
+    setItems([contestJsonInfo]);
+  }, [contestJsonInfo]);
+  return (
+    <div className="container">
+      <div className="searchRow">
+        <textarea className="searchResult" ref={jsonInputRef}></textarea>
+        <button className="displayButton" onClick={(event) => onPushedDisplayButton(event, jsonInputRef)}>
+          表示
+        </button>
+      </div>
+      <div className="resultArea">
+        <div className="json-display">{items[0]}</div>
+      </div>
+    </div>
+  );
 }
-export { displayClass };
+export { Graph };

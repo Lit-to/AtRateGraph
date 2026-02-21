@@ -1,10 +1,9 @@
 import { SearchClass } from "../../component/idSearch";
-import { displayClass } from "../../component/jsonDisplay";
+import { Graph } from "../../component/jsonDisplay";
 import "./main.css";
 
 function Top() {
   const searchClass = new SearchClass();
-  const jsonDisplay = new displayClass();
   return (
     <div className="main-container">
       <div className="top-bg">
@@ -13,10 +12,11 @@ function Top() {
         </div>
       </div>
       <div className="bottom-panel">
-        <div className="search-floating">{searchClass.searchBox()}</div>
-        <div className="search-floating">{jsonDisplay.searchBox()}</div>
+        <div className="container">
+          <div className="search-floating">{searchClass.searchBox()}</div>
+          <Graph contestJsonInfo="" />
+        </div>
       </div>
-      <div className="graph-space"></div>
     </div>
   );
 }
