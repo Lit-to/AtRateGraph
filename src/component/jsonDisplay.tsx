@@ -1,9 +1,9 @@
-import { useRef, type JSX, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import "./jsonDisplay.css";
 
 function Graph({ contestJsonInfo }: { contestJsonInfo: string }) {
   function onPushedDisplayButton(
-    event: React.MouseEvent<HTMLButtonElement>,
+    _: React.MouseEvent<HTMLButtonElement>,
     jsonInputRef: React.RefObject<HTMLTextAreaElement | null>
   ) {
     if (jsonInputRef.current === null) {

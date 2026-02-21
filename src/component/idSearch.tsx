@@ -9,7 +9,7 @@ class SearchClass {
     this.searchInputRef = useRef<HTMLInputElement>(null);
   }
   async onPushedSearchButton(
-    event: React.MouseEvent<HTMLButtonElement>,
+    _: React.MouseEvent<HTMLButtonElement>,
     searchInputRef: React.RefObject<HTMLInputElement | null>
   ) {
     if (searchInputRef.current === null) {
