@@ -1,17 +1,9 @@
 import { useRef, useEffect, useState } from "react";
 import "./jsonDisplay.css";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-type Point = {
-  x: number;
-  y: number;
-};
-
-const data: Point[] = [
-  { x: 0, y: 1 },
-  { x: 1, y: 3 },
-  { x: 2, y: 2 },
-  { x: 3, y: 5 }
-];
+import { type Point } from "./extractPerf";
+import { extractPerf } from "./extractPerf";
+let data: Point[] = [];
 
 function Graph({ contestJsonInfo }: { contestJsonInfo: string }) {
   function onPushedDisplayButton(
@@ -21,7 +13,7 @@ function Graph({ contestJsonInfo }: { contestJsonInfo: string }) {
     if (jsonInputRef.current === null) {
       return;
     }
-    setItems([jsonInputRef.current.value]);
+    data = extractPerf(jsonInputRef.current.value);
     showGraph(true);
     return;
   }
@@ -41,9 +33,6 @@ function Graph({ contestJsonInfo }: { contestJsonInfo: string }) {
         <button className="displayButton" onClick={(event) => onPushedDisplayButton(event, jsonInputRef)}>
           表示
         </button>
-      </div>
-      <div className="resultArea">
-        <div className="json-display">{items[0]}</div>
       </div>
       {isShowedGraph && (
         <div className="graphArea">
