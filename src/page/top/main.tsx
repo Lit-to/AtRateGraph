@@ -14,7 +14,7 @@ function Top() {
       <div className="bottom-panel">
         <div className="container">
           <div className="search-floating">{searchClass.searchBox()}</div>
-          <Graph contestJsonInfo="" />
+          <Graph />
         </div>
       </div>
     </div>

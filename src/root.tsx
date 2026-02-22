@@ -12,10 +12,6 @@ function Root() {
       <HashRouter>
         <Routes>
           <Route path="/" element={<Top />} />
-          {/* <Route
-            path="/result"
-            element={<Signup loginHook={updateIsLoggedIn} />}
-          /> */}
         </Routes>
       </HashRouter>
     </StrictMode>

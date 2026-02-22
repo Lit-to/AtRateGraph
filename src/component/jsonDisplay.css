@@ -90,6 +90,8 @@
   margin-top: 24px;
 }
 
+
+
 @media (max-width: 600px) {
   .searchRow {
     flex-direction: column; /* ← 縦積み */
