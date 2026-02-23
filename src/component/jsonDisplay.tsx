@@ -20,7 +20,7 @@ function Graph() {
     for (let i = 0; i < data.length; ++i) {
       maxY = Math.max(maxY, data[i].y);
     }
-    changeGraphTop(maxY);
+    changeGraphTop(maxY + 400);
 
     return;
   }
@@ -31,7 +31,6 @@ function Graph() {
     setRange([range[0], Number(event.currentTarget.value)]);
   }
   function changeGraphTop(value: number) {
-    value += 400;
     setGraphTop(value);
     let graphSep = [0];
     let last = 0;
@@ -45,7 +44,7 @@ function Graph() {
   const jsonInputRef = useRef<HTMLTextAreaElement>(null);
   const [isShowedGraph, setIsShowedGraph] = useState(false);
   const [range, setRange] = useState([0, 0]);
-  const [graphTop, setGraphTop] = useState(800);
+  const [graphTop, setGraphTop] = useState(0);
   const [graphSep, setGraphSep] = useState([0]);
   return (
     <div className="container">
@@ -71,7 +70,7 @@ function Graph() {
               <ReferenceArea y1={1600} y2={1999} fill="#002aff" fillOpacity={0.4} />
               <ReferenceArea y1={2000} y2={2399} fill="#fbff00" fillOpacity={0.4} />
               <ReferenceArea y1={2400} y2={2799} fill="#ff8800" fillOpacity={0.4} />
-              <ReferenceArea y1={2800} y2={4800} fill="#ff0000" fillOpacity={0.4} />
+              <ReferenceArea y1={2800} y2={graphTop} fill="#ff0000" fillOpacity={0.4} />
             </LineChart>
           </ResponsiveContainer>
           最小値:<input type="number" value={range[0]} onChange={onChangeMin}></input>
