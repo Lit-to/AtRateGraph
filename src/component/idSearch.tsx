@@ -1,4 +1,4 @@
-import {  useRef, useState, type JSX } from "react";
+import { useRef, useState, type JSX } from "react";
 import "./idSearch.css";
 // import axios from "axios";
 // import { Link } from "react-router-dom";
@@ -11,7 +11,7 @@ class SearchClass {
   async onPushedSearchButton(
     _: React.MouseEvent<HTMLButtonElement>,
     searchInputRef: React.RefObject<HTMLInputElement | null>,
-    setUserProfileUrl:Function
+    setUserProfileUrl: Function
   ) {
     if (searchInputRef.current === null) {
       return;
@@ -34,7 +34,7 @@ class SearchClass {
 
   public searchBox(): JSX.Element {
     const [userProfileUrl, setUserProfileUrl] = useState("https://atcoder.jp/");
-    
+
     return (
       <div className="container">
         <div className="searchRow">
@@ -47,12 +47,16 @@ class SearchClass {
           />
           <button
             className="searchButton"
-            onClick={async (event) => await this.onPushedSearchButton(event, this.searchInputRef,setUserProfileUrl)}
+            onClick={async (event) => await this.onPushedSearchButton(event, this.searchInputRef, setUserProfileUrl)}
           >
             検索
           </button>
         </div>
-        <div><a href={userProfileUrl} target="_blank">{userProfileUrl}</a></div>
+        <div>
+          <a href={userProfileUrl} target="_blank">
+            {userProfileUrl}
+          </a>
+        </div>
       </div>
     );
   }

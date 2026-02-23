@@ -6,7 +6,6 @@ import { extractPerf } from "./extractPerf";
 let data: Point[] = [];
 
 function Graph() {
-
   function onPushedDisplayButton(
     _: React.MouseEvent<HTMLButtonElement>,
     jsonInputRef: React.RefObject<HTMLTextAreaElement | null>
@@ -16,31 +15,38 @@ function Graph() {
     }
     data = extractPerf(jsonInputRef.current.value);
     setIsShowedGraph(true);
-    setRange([0,data.length]);
+    setRange([0, data.length]);
+    let maxY = 0;
+    for (let i = 0; i < data.length; ++i) {
+      maxY = Math.max(maxY, data[i].y);
+    }
+    changeGraphTop(maxY);
+
     return;
   }
-  function onChangeMin(event: React.ChangeEvent<HTMLInputElement>){
-    setRange([Number(event.currentTarget.value),range[1]]);
+  function onChangeMin(event: React.ChangeEvent<HTMLInputElement>) {
+    setRange([Number(event.currentTarget.value), range[1]]);
   }
-  function onChangeMax(event: React.ChangeEvent<HTMLInputElement>){
-    setRange([range[0],Number(event.currentTarget.value)]);
+  function onChangeMax(event: React.ChangeEvent<HTMLInputElement>) {
+    setRange([range[0], Number(event.currentTarget.value)]);
   }
-  function changeGraphTop(value:number){
+  function changeGraphTop(value: number) {
+    value += 400;
     setGraphTop(value);
     let graphSep = [0];
     let last = 0;
-    while(0<value){
-      value-=400;
-      last+=400
+    while (0 < value) {
+      value -= 400;
+      last += 400;
       graphSep.push(last);
     }
     setGraphSep(graphSep);
   }
   const jsonInputRef = useRef<HTMLTextAreaElement>(null);
   const [isShowedGraph, setIsShowedGraph] = useState(false);
-  const [range,setRange] = useState([0,0])
-  const [graphTop,setGraphTop] = useState(800);
-  const [graphSep,setGraphSep] = useState([0]);
+  const [range, setRange] = useState([0, 0]);
+  const [graphTop, setGraphTop] = useState(800);
+  const [graphSep, setGraphSep] = useState([0]);
   return (
     <div className="container">
       <div className="searchRow">
@@ -51,11 +57,11 @@ function Graph() {
       </div>
       {isShowedGraph && (
         <div className="graphArea">
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height="100%">
             <LineChart data={data}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="x" type="number" domain={range} allowDataOverflow={true}/>
-              <YAxis ticks={graphSep}/>
+              <XAxis dataKey="x" type="number" domain={range} allowDataOverflow={true} />
+              <YAxis ticks={graphSep} />
               <Tooltip />
               <Line type="monotone" dataKey="y" stroke="#8884d8" activeDot={{ r: 2 }} />
               <ReferenceArea y1={0} y2={399} fill="#404040" fillOpacity={0.4} />
@@ -65,12 +71,11 @@ function Graph() {
               <ReferenceArea y1={1600} y2={1999} fill="#002aff" fillOpacity={0.4} />
               <ReferenceArea y1={2000} y2={2399} fill="#fbff00" fillOpacity={0.4} />
               <ReferenceArea y1={2400} y2={2799} fill="#ff8800" fillOpacity={0.4} />
-              <ReferenceArea y1={2800} y2={3200} fill="#ff0000" fillOpacity={0.4} />
+              <ReferenceArea y1={2800} y2={4800} fill="#ff0000" fillOpacity={0.4} />
             </LineChart>
           </ResponsiveContainer>
-        最小値:<input type="number" value={range[0]} onChange={onChangeMin}></input>
-        最大値:<input type="number" value={range[1]} onChange={onChangeMax}></input>
-        
+          最小値:<input type="number" value={range[0]} onChange={onChangeMin}></input>
+          最大値:<input type="number" value={range[1]} onChange={onChangeMax}></input>
         </div>
       )}
     </div>
