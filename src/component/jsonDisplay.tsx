@@ -25,9 +25,22 @@ function Graph() {
   function onChangeMax(event: React.ChangeEvent<HTMLInputElement>){
     setRange([range[0],Number(event.currentTarget.value)]);
   }
+  function changeGraphTop(value:number){
+    setGraphTop(value);
+    let graphSep = [0];
+    let last = 0;
+    while(0<value){
+      value-=400;
+      last+=400
+      graphSep.push(last);
+    }
+    setGraphSep(graphSep);
+  }
   const jsonInputRef = useRef<HTMLTextAreaElement>(null);
   const [isShowedGraph, setIsShowedGraph] = useState(false);
   const [range,setRange] = useState([0,0])
+  const [graphTop,setGraphTop] = useState(800);
+  const [graphSep,setGraphSep] = useState([0]);
   return (
     <div className="container">
       <div className="searchRow">
@@ -42,7 +55,7 @@ function Graph() {
             <LineChart data={data}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="x" type="number" domain={range} allowDataOverflow={true}/>
-              <YAxis ticks={[0,400,800,1200,1600,2000,2400,2800,3200]}/>
+              <YAxis ticks={graphSep}/>
               <Tooltip />
               <Line type="monotone" dataKey="y" stroke="#8884d8" activeDot={{ r: 2 }} />
               <ReferenceArea y1={0} y2={399} fill="#404040" fillOpacity={0.4} />
@@ -55,8 +68,8 @@ function Graph() {
               <ReferenceArea y1={2800} y2={3200} fill="#ff0000" fillOpacity={0.4} />
             </LineChart>
           </ResponsiveContainer>
-        <input type="number" value={range[0]} onChange={onChangeMin}></input>
-        <input type="number" value={range[1]} onChange={onChangeMax}></input>
+        最小値:<input type="number" value={range[0]} onChange={onChangeMin}></input>
+        最大値:<input type="number" value={range[1]} onChange={onChangeMax}></input>
         
         </div>
       )}
